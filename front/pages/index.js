@@ -1,6 +1,6 @@
 import Nav from '../components/organisms/nav'
 import LoginStatus from '../components/organisms/loginstatus'
-import TalkRoom from '../components/talkroom'
+import TalkRoom from '../components/organisms/talkroom'
 //import css from "../styles.css"
 
 export default () => (

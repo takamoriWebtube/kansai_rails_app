@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import Link from 'next/Link';
 
 export default class TalkRoom extends Component {
 
@@ -12,6 +13,9 @@ export default class TalkRoom extends Component {
                     <img src='/images/star.jpeg'/>
                     <div className="signin_mes">
                         <p>投稿するにはログインしてください</p>
+                        <Link href="/signin">
+                        <a>→こちらから←</a>
+                        </Link>
                     </div>
                 </div>
                 <style jsx>{`
@@ -48,6 +52,9 @@ export default class TalkRoom extends Component {
                         padding: 20px;
                     }
                     .signin_mes p {
+                        color: white;
+                    }
+                    .signin_mes a {
                         color: white;
                     }
                 `}</style>
