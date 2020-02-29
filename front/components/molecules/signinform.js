@@ -5,7 +5,7 @@ import request from 'superagent'
 export default class SignInForm extends Component {
     constructor (props) {
         super(props)
-        this.state = { userid: '1',password: '1',jump: '', msg: '' }
+        this.state = { email: '1',password: '1',jump: '', msg: '' }
     }
 
     api (command) {
@@ -13,7 +13,7 @@ export default class SignInForm extends Component {
         request
             .post('https://rails.local/api/' + command)
             .send({
-                userid: this.state.userid,
+                email: this.state.email,
                 passwd: this.state.passwd
             })
             .end((err, res) => {
@@ -44,8 +44,8 @@ export default class SignInForm extends Component {
             <div>
                 <div>
                     <span>メールアドレス:</span>
-                    <input value={this.state.userid}
-                        onChange={e => changed('userid', e)} /><br />
+                    <input value={this.state.email}
+                        onChange={e => changed('email', e)} /><br />
                     <span>パスワード</span>
                     <input type='password' value={this.state.passwd}
                         onChange={e => changed('passwd' , e)} /><br />
