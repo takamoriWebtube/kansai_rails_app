@@ -1,0 +1,11 @@
+.DS_Store
+
+/back/mysql
+/back/mysqld
+
+/back/rails/log/*
+/back/rails/tmp/*
+
+/front/.next
+
+/web/ssl
