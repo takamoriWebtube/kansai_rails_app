@@ -1,14 +1,13 @@
 import Nav from '../components/organisms/nav'
 import LoginStatus from '../components/organisms/loginstatus'
+import TalkRoom from '../components/talkroom'
 //import css from "../styles.css"
 
 export default () => (
     <div className="page">
         <Nav />
         <LoginStatus />
-        <div>
-            <h1>Topo</h1>
-        </div>
+        <TalkRoom />
         <style jsx>{`
             .page {
                 display: flex;
