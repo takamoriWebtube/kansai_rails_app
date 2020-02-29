@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignInAlt, faHome, faUser, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import React, {Component} from 'react'
+import Router from 'next/router'
 
 export default class Nav extends Component {
     constructor (props) {
@@ -20,6 +21,7 @@ export default class Nav extends Component {
     
     logout() {
         localStorage.clear()
+        Router.push('/signin');
     }
 
     render () {
