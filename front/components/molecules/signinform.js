@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import Router from 'next/router'
 import request from 'superagent'
 
 
@@ -17,9 +18,14 @@ export default class SignInForm extends Component {
                 passwd: this.state.passwd
             })
             .end((err, res) => {
-                console.log(err)
-                console.log(res)
-                alert('無接続')
+                if (err) {
+                    console.log(err.response.text)
+                    this.setState({msg: err.response.text})
+                    return
+                }
+                localStorage.setItem('token', res.text)
+                let token = localStorage.getItem('token');
+                Router.push('/');
                 /*
                 if (err) return
                 const r = res.body

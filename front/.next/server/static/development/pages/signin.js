@@ -107,11 +107,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var styled_jsx_style__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(styled_jsx_style__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! superagent */ "superagent");
-/* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(superagent__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! next/router */ "next/router");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! superagent */ "superagent");
+/* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(superagent__WEBPACK_IMPORTED_MODULE_3__);
 var _jsxFileName = "/app/components/molecules/signinform.js";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
+
 
 
 class SignInForm extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
@@ -127,13 +130,21 @@ class SignInForm extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
 
   api(command) {
     console.log(command);
-    superagent__WEBPACK_IMPORTED_MODULE_2___default.a.post('https://rails.local/api/' + command).send({
+    superagent__WEBPACK_IMPORTED_MODULE_3___default.a.post('https://rails.local/api/' + command).send({
       email: this.state.email,
       passwd: this.state.passwd
     }).end((err, res) => {
-      console.log(err);
-      console.log(res);
-      alert('無接続');
+      if (err) {
+        console.log(err.response.text);
+        this.setState({
+          msg: err.response.text
+        });
+        return;
+      }
+
+      localStorage.setItem('token', res.text);
+      let token = localStorage.getItem('token');
+      next_router__WEBPACK_IMPORTED_MODULE_2___default.a.push('/');
       /*
       if (err) return
       const r = res.body
@@ -156,7 +167,7 @@ class SignInForm extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
         to: this.state.jump,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 40
+          lineNumber: 46
         },
         __self: this
       });
@@ -170,21 +181,21 @@ class SignInForm extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
       className: "jsx-3259989858",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 44
+        lineNumber: 50
       },
       __self: this
     }, __jsx("div", {
       className: "jsx-3259989858",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 45
+        lineNumber: 51
       },
       __self: this
     }, __jsx("span", {
       className: "jsx-3259989858",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 46
+        lineNumber: 52
       },
       __self: this
     }, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9:"), __jsx("input", {
@@ -193,21 +204,21 @@ class SignInForm extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
       className: "jsx-3259989858",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 47
+        lineNumber: 53
       },
       __self: this
     }), __jsx("br", {
       className: "jsx-3259989858",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 48
+        lineNumber: 54
       },
       __self: this
     }), __jsx("span", {
       className: "jsx-3259989858",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 49
+        lineNumber: 55
       },
       __self: this
     }, "\u30D1\u30B9\u30EF\u30FC\u30C9"), __jsx("input", {
@@ -217,14 +228,14 @@ class SignInForm extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
       className: "jsx-3259989858",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 50
+        lineNumber: 56
       },
       __self: this
     }), __jsx("br", {
       className: "jsx-3259989858",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 51
+        lineNumber: 57
       },
       __self: this
     }), __jsx("button", {
@@ -232,27 +243,27 @@ class SignInForm extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
       className: "jsx-3259989858",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 52
+        lineNumber: 58
       },
       __self: this
     }, "\u30ED\u30B0\u30A4\u30F3"), __jsx("br", {
       className: "jsx-3259989858",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 52
+        lineNumber: 58
       },
       __self: this
     }), __jsx("p", {
       className: "jsx-3259989858",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 53
+        lineNumber: 59
       },
       __self: this
     }, this.state.msg)), __jsx(styled_jsx_style__WEBPACK_IMPORTED_MODULE_0___default.a, {
       id: "3259989858",
       __self: this
-    }, "span.jsx-3259989858{display:block;}input.jsx-3259989858{width:100%;height:32px;margin-bottom:40px;}button.jsx-3259989858{display:block;width:60px;height:32px;margin-left:auto;}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9hcHAvY29tcG9uZW50cy9tb2xlY3VsZXMvc2lnbmluZm9ybS5qcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFzRDRCLEFBR3VDLEFBR0gsQUFLRyxXQUpGLEdBSGhCLEFBUWUsU0FKUSxFQUtQLFlBQ0ssS0FMckIsWUFNQSIsImZpbGUiOiIvYXBwL2NvbXBvbmVudHMvbW9sZWN1bGVzL3NpZ25pbmZvcm0uanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgUmVhY3QsIHtDb21wb25lbnR9IGZyb20gJ3JlYWN0J1xuaW1wb3J0IHJlcXVlc3QgZnJvbSAnc3VwZXJhZ2VudCdcblxuXG5leHBvcnQgZGVmYXVsdCBjbGFzcyBTaWduSW5Gb3JtIGV4dGVuZHMgQ29tcG9uZW50IHtcbiAgICBjb25zdHJ1Y3RvciAocHJvcHMpIHtcbiAgICAgICAgc3VwZXIocHJvcHMpXG4gICAgICAgIHRoaXMuc3RhdGUgPSB7IGVtYWlsOiAnMScscGFzc3dvcmQ6ICcxJyxqdW1wOiAnJywgbXNnOiAnJyB9XG4gICAgfVxuXG4gICAgYXBpIChjb21tYW5kKSB7XG4gICAgICAgIGNvbnNvbGUubG9nKGNvbW1hbmQpXG4gICAgICAgIHJlcXVlc3RcbiAgICAgICAgICAgIC5wb3N0KCdodHRwczovL3JhaWxzLmxvY2FsL2FwaS8nICsgY29tbWFuZClcbiAgICAgICAgICAgIC5zZW5kKHtcbiAgICAgICAgICAgICAgICBlbWFpbDogdGhpcy5zdGF0ZS5lbWFpbCxcbiAgICAgICAgICAgICAgICBwYXNzd2Q6IHRoaXMuc3RhdGUucGFzc3dkXG4gICAgICAgICAgICB9KVxuICAgICAgICAgICAgLmVuZCgoZXJyLCByZXMpID0+IHtcbiAgICAgICAgICAgICAgICBjb25zb2xlLmxvZyhlcnIpXG4gICAgICAgICAgICAgICAgY29uc29sZS5sb2cocmVzKVxuICAgICAgICAgICAgICAgIGFsZXJ0KCfnhKHmjqXntponKVxuICAgICAgICAgICAgICAgIC8qXG4gICAgICAgICAgICAgICAgaWYgKGVycikgcmV0dXJuXG4gICAgICAgICAgICAgICAgY29uc3QgciA9IHJlcy5ib2R5XG4gICAgICAgICAgICAgICAgY29uc29sZS5sb2cocilcbiAgICAgICAgICAgICAgICBpZiAoci5zdGF0dXMgJiYgci50b2tlbikge1xuICAgICAgICAgICAgICAgICAgICBhbGVydCgn5o6l57aaJylcbiAgICAgICAgICAgICAgICAgICAgd2luZG93LmxvY2FsU3RvcmFnZVsnc25zX2lkJ10gPSB0aGlzLnN0YXRlLnVzZXJpZFxuICAgICAgICAgICAgICAgICAgICB3aW5kb3cubG9jYWxTdG9yYWdlWydzbnNfYXV0aF90b2tlbiddID0gci50b2tlblxuICAgICAgICAgICAgICAgICAgICB0aGlzLnNldFN0YXRlKHtKdW1wOiAnLyd9KVxuICAgICAgICAgICAgICAgICAgICByZXR1cm5cbiAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgdGhpcy5zZXRTdGF0ZSh7bXNnOiByLm1zZ30pXG4gICAgICAgICAgICAgICAgKi9cbiAgICAgICAgICAgIH0pXG4gICAgfVxuICAgIHJlbmRlciAoKSB7XG4gICAgICAgIGlmKHRoaXMuc3RhdGUuanVtcCkge1xuICAgICAgICAgICAgcmV0dXJuIDxSZWRpcmVjdCB0bz17dGhpcy5zdGF0ZS5qdW1wfSAvPlxuICAgICAgICB9XG4gICAgICAgIGNvbnN0IGNoYW5nZWQgPSAobmFtZSwgZSkgPT4gdGhpcy5zZXRTdGF0ZSh7W25hbWVdOiBlLnRhcmdldC52YWx1ZX0pXG4gICAgICAgIHJldHVybiAoXG4gICAgICAgICAgICA8ZGl2PlxuICAgICAgICAgICAgICAgIDxkaXY+XG4gICAgICAgICAgICAgICAgICAgIDxzcGFuPuODoeODvOODq+OCouODieODrOOCuTo8L3NwYW4+XG4gICAgICAgICAgICAgICAgICAgIDxpbnB1dCB2YWx1ZT17dGhpcy5zdGF0ZS5lbWFpbH1cbiAgICAgICAgICAgICAgICAgICAgICAgIG9uQ2hhbmdlPXtlID0+IGNoYW5nZWQoJ2VtYWlsJywgZSl9IC8+PGJyIC8+XG4gICAgICAgICAgICAgICAgICAgIDxzcGFuPuODkeOCueODr+ODvOODiTwvc3Bhbj5cbiAgICAgICAgICAgICAgICAgICAgPGlucHV0IHR5cGU9J3Bhc3N3b3JkJyB2YWx1ZT17dGhpcy5zdGF0ZS5wYXNzd2R9XG4gICAgICAgICAgICAgICAgICAgICAgICBvbkNoYW5nZT17ZSA9PiBjaGFuZ2VkKCdwYXNzd2QnICwgZSl9IC8+PGJyIC8+XG4gICAgICAgICAgICAgICAgICAgIDxidXR0b24gb25DbGljaz17ZeOAgD0+IHRoaXMuYXBpKCdsb2dpbicpfT7jg63jgrDjgqTjg7M8L2J1dHRvbj48YnIgLz5cbiAgICAgICAgICAgICAgICAgICAgPHA+e3RoaXMuc3RhdGUubXNnfTwvcD5cbiAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICA8c3R5bGUganN4PntgXG4gICAgICAgICAgICAgICAgICAgIHNwYW4ge1xuICAgICAgICAgICAgICAgICAgICAgICAgZGlzcGxheTogYmxvY2s7XG4gICAgICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICAgICAgaW5wdXQge1xuICAgICAgICAgICAgICAgICAgICAgICAgd2lkdGg6IDEwMCU7XG4gICAgICAgICAgICAgICAgICAgICAgICBoZWlnaHQ6IDMycHg7XG4gICAgICAgICAgICAgICAgICAgICAgICBtYXJnaW4tYm90dG9tOiA0MHB4O1xuICAgICAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgICAgIGJ1dHRvbiB7XG4gICAgICAgICAgICAgICAgICAgICAgICBkaXNwbGF5OiBibG9jaztcbiAgICAgICAgICAgICAgICAgICAgICAgIHdpZHRoOiA2MHB4O1xuICAgICAgICAgICAgICAgICAgICAgICAgaGVpZ2h0OiAzMnB4O1xuICAgICAgICAgICAgICAgICAgICAgICAgbWFyZ2luLWxlZnQ6IGF1dG87XG4gICAgICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICBgfTwvc3R5bGU+XG4gICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgKVxuICAgIH1cbn0iXX0= */\n/*@ sourceURL=/app/components/molecules/signinform.js */"));
+    }, "span.jsx-3259989858{display:block;}input.jsx-3259989858{width:100%;height:32px;margin-bottom:40px;}button.jsx-3259989858{display:block;width:60px;height:32px;margin-left:auto;}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9hcHAvY29tcG9uZW50cy9tb2xlY3VsZXMvc2lnbmluZm9ybS5qcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUE0RDRCLEFBR3VDLEFBR0gsQUFLRyxXQUpGLEdBSGhCLEFBUWUsU0FKUSxFQUtQLFlBQ0ssS0FMckIsWUFNQSIsImZpbGUiOiIvYXBwL2NvbXBvbmVudHMvbW9sZWN1bGVzL3NpZ25pbmZvcm0uanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgUmVhY3QsIHtDb21wb25lbnR9IGZyb20gJ3JlYWN0J1xuaW1wb3J0IFJvdXRlciBmcm9tICduZXh0L3JvdXRlcidcbmltcG9ydCByZXF1ZXN0IGZyb20gJ3N1cGVyYWdlbnQnXG5cblxuZXhwb3J0IGRlZmF1bHQgY2xhc3MgU2lnbkluRm9ybSBleHRlbmRzIENvbXBvbmVudCB7XG4gICAgY29uc3RydWN0b3IgKHByb3BzKSB7XG4gICAgICAgIHN1cGVyKHByb3BzKVxuICAgICAgICB0aGlzLnN0YXRlID0geyBlbWFpbDogJzEnLHBhc3N3b3JkOiAnMScsanVtcDogJycsIG1zZzogJycgfVxuICAgIH1cblxuICAgIGFwaSAoY29tbWFuZCkge1xuICAgICAgICBjb25zb2xlLmxvZyhjb21tYW5kKVxuICAgICAgICByZXF1ZXN0XG4gICAgICAgICAgICAucG9zdCgnaHR0cHM6Ly9yYWlscy5sb2NhbC9hcGkvJyArIGNvbW1hbmQpXG4gICAgICAgICAgICAuc2VuZCh7XG4gICAgICAgICAgICAgICAgZW1haWw6IHRoaXMuc3RhdGUuZW1haWwsXG4gICAgICAgICAgICAgICAgcGFzc3dkOiB0aGlzLnN0YXRlLnBhc3N3ZFxuICAgICAgICAgICAgfSlcbiAgICAgICAgICAgIC5lbmQoKGVyciwgcmVzKSA9PiB7XG4gICAgICAgICAgICAgICAgaWYgKGVycikge1xuICAgICAgICAgICAgICAgICAgICBjb25zb2xlLmxvZyhlcnIucmVzcG9uc2UudGV4dClcbiAgICAgICAgICAgICAgICAgICAgdGhpcy5zZXRTdGF0ZSh7bXNnOiBlcnIucmVzcG9uc2UudGV4dH0pXG4gICAgICAgICAgICAgICAgICAgIHJldHVyblxuICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICBsb2NhbFN0b3JhZ2Uuc2V0SXRlbSgndG9rZW4nLCByZXMudGV4dClcbiAgICAgICAgICAgICAgICBsZXQgdG9rZW4gPSBsb2NhbFN0b3JhZ2UuZ2V0SXRlbSgndG9rZW4nKTtcbiAgICAgICAgICAgICAgICBSb3V0ZXIucHVzaCgnLycpO1xuICAgICAgICAgICAgICAgIC8qXG4gICAgICAgICAgICAgICAgaWYgKGVycikgcmV0dXJuXG4gICAgICAgICAgICAgICAgY29uc3QgciA9IHJlcy5ib2R5XG4gICAgICAgICAgICAgICAgY29uc29sZS5sb2cocilcbiAgICAgICAgICAgICAgICBpZiAoci5zdGF0dXMgJiYgci50b2tlbikge1xuICAgICAgICAgICAgICAgICAgICBhbGVydCgn5o6l57aaJylcbiAgICAgICAgICAgICAgICAgICAgd2luZG93LmxvY2FsU3RvcmFnZVsnc25zX2lkJ10gPSB0aGlzLnN0YXRlLnVzZXJpZFxuICAgICAgICAgICAgICAgICAgICB3aW5kb3cubG9jYWxTdG9yYWdlWydzbnNfYXV0aF90b2tlbiddID0gci50b2tlblxuICAgICAgICAgICAgICAgICAgICB0aGlzLnNldFN0YXRlKHtKdW1wOiAnLyd9KVxuICAgICAgICAgICAgICAgICAgICByZXR1cm5cbiAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgdGhpcy5zZXRTdGF0ZSh7bXNnOiByLm1zZ30pXG4gICAgICAgICAgICAgICAgKi9cbiAgICAgICAgICAgIH0pXG4gICAgfVxuICAgIHJlbmRlciAoKSB7XG4gICAgICAgIGlmKHRoaXMuc3RhdGUuanVtcCkge1xuICAgICAgICAgICAgcmV0dXJuIDxSZWRpcmVjdCB0bz17dGhpcy5zdGF0ZS5qdW1wfSAvPlxuICAgICAgICB9XG4gICAgICAgIGNvbnN0IGNoYW5nZWQgPSAobmFtZSwgZSkgPT4gdGhpcy5zZXRTdGF0ZSh7W25hbWVdOiBlLnRhcmdldC52YWx1ZX0pXG4gICAgICAgIHJldHVybiAoXG4gICAgICAgICAgICA8ZGl2PlxuICAgICAgICAgICAgICAgIDxkaXY+XG4gICAgICAgICAgICAgICAgICAgIDxzcGFuPuODoeODvOODq+OCouODieODrOOCuTo8L3NwYW4+XG4gICAgICAgICAgICAgICAgICAgIDxpbnB1dCB2YWx1ZT17dGhpcy5zdGF0ZS5lbWFpbH1cbiAgICAgICAgICAgICAgICAgICAgICAgIG9uQ2hhbmdlPXtlID0+IGNoYW5nZWQoJ2VtYWlsJywgZSl9IC8+PGJyIC8+XG4gICAgICAgICAgICAgICAgICAgIDxzcGFuPuODkeOCueODr+ODvOODiTwvc3Bhbj5cbiAgICAgICAgICAgICAgICAgICAgPGlucHV0IHR5cGU9J3Bhc3N3b3JkJyB2YWx1ZT17dGhpcy5zdGF0ZS5wYXNzd2R9XG4gICAgICAgICAgICAgICAgICAgICAgICBvbkNoYW5nZT17ZSA9PiBjaGFuZ2VkKCdwYXNzd2QnICwgZSl9IC8+PGJyIC8+XG4gICAgICAgICAgICAgICAgICAgIDxidXR0b24gb25DbGljaz17ZeOAgD0+IHRoaXMuYXBpKCdsb2dpbicpfT7jg63jgrDjgqTjg7M8L2J1dHRvbj48YnIgLz5cbiAgICAgICAgICAgICAgICAgICAgPHA+e3RoaXMuc3RhdGUubXNnfTwvcD5cbiAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICA8c3R5bGUganN4PntgXG4gICAgICAgICAgICAgICAgICAgIHNwYW4ge1xuICAgICAgICAgICAgICAgICAgICAgICAgZGlzcGxheTogYmxvY2s7XG4gICAgICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICAgICAgaW5wdXQge1xuICAgICAgICAgICAgICAgICAgICAgICAgd2lkdGg6IDEwMCU7XG4gICAgICAgICAgICAgICAgICAgICAgICBoZWlnaHQ6IDMycHg7XG4gICAgICAgICAgICAgICAgICAgICAgICBtYXJnaW4tYm90dG9tOiA0MHB4O1xuICAgICAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgICAgIGJ1dHRvbiB7XG4gICAgICAgICAgICAgICAgICAgICAgICBkaXNwbGF5OiBibG9jaztcbiAgICAgICAgICAgICAgICAgICAgICAgIHdpZHRoOiA2MHB4O1xuICAgICAgICAgICAgICAgICAgICAgICAgaGVpZ2h0OiAzMnB4O1xuICAgICAgICAgICAgICAgICAgICAgICAgbWFyZ2luLWxlZnQ6IGF1dG87XG4gICAgICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICBgfTwvc3R5bGU+XG4gICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgKVxuICAgIH1cbn0iXX0= */\n/*@ sourceURL=/app/components/molecules/signinform.js */"));
   }
 
 }
@@ -385,6 +396,17 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
 
 module.exports = __webpack_require__(/*! /app/pages/signin.js */"./pages/signin.js");
 
+
+/***/ }),
+
+/***/ "next/router":
+/*!******************************!*\
+  !*** external "next/router" ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("next/router");
 
 /***/ }),
 
