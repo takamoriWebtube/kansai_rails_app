@@ -1,0 +1,42 @@
+version: '3'
+services:
+  rails:
+    build: back/rails
+    volumes:
+      - ./back/rails:/app
+      - ./back/mysql/mysqld:/var/run/mysqld
+    command: rails s -p 8000 -b 0.0.0.0
+    depends_on:
+      - mysql
+    ports:
+      - '8000:8000'
+  nginx:
+    build: web
+    volumes:
+       - ./front:/app
+       - ./back/rails:/rails
+       - ./web/ssl:/etc/nginx/ssl
+    ports:
+        - 443:443
+    depends_on:
+        - next
+        - rails
+    links:
+        - next:next
+        - rails:rails
+  mysql:
+    image: mysql
+    command: mysqld --default-authentication-plugin=mysql_native_password
+    env_file:
+      - ./back/mysql/db.env
+    volumes:
+      - ./back/mysql/mysql:/var/lib/mysql
+      - ./back/mysql/mysqld:/var/run/mysqld
+      #- ./back/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+  next:
+    ports:
+      - '3000:3000'
+    build: front
+    volumes:
+      - ./front:/app
+    command: npm run dev
